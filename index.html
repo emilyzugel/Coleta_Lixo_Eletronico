@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Descarte de Lixo Eletrônico</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #2b7a78;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    main {
+      padding: 1rem 2rem;
+    }
+
+    h2 {
+      color: #2b7a78;
+      margin-top: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      background: #e0f7fa;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 5px;
+    }
+
+    #map {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    footer {
+      background: #17252a;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Descarte Correto de Lixo Eletrônico</h1>
+    <p>Ajude o meio ambiente dando o destino certo aos seus eletrônicos antigos.</p>
+  </header>
+
+  <main>
+    <section class="info">
+      <h2>Por que descartar corretamente?</h2>
+      <p>O lixo eletrônico contém metais pesados e substâncias tóxicas que contaminam o solo e a água. Descartar corretamente ajuda o planeta e ainda permite o reaproveitamento de materiais.</p>
+    </section>
+
+    <section class="pontos">
+      <h2>Pontos de Coleta em Frederico Westphalen</h2>
+      <ul>
+        <li><strong>EcoCentro UFSM:</strong> Rua X, Bairro Y – Seg a Sex, 8h às 17h</li>
+        <li><strong>Loja GreenTech:</strong> Av. Central, 123 – Sab, 9h às 12h</li>
+        <li><strong>Shopping da Música:</strong> Rua do Comércio, 456 – Seg a Sab, horário comercial</li>
+      </ul>
+    </section>
+
+    <section class="mapa">
+      <h2>Mapa Interativo</h2>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Projeto de Extensão - ADS - Instituto Federal Farroupilha</p>
+  </footer>
+
+  <script>
+    function initMap() {
+      const centro = { lat: -27.3586, lng: -53.3955 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: centro,
+      });
+
+      const pontos = [
+        { nome: "EcoCentro UFSM", lat: -27.3575, lng: -53.3960 },
+        { nome: "Loja GreenTech", lat: -27.3612, lng: -53.3925 },
+        { nome: "Shopping da Música", lat: -27.3589, lng: -53.3940 }
+      ];
+
+      pontos.forEach(p => {
+        new google.maps.Marker({
+          position: { lat: p.lat, lng: p.lng },
+          map,
+          title: p.nome,
+        });
+      });
+    }
+  </script>
+
+  <!-- Substitua SUA_CHAVE_API_AQUI pela sua chave da API do Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_API_AQUI&callback=initMap"></script>
+</body>
+</html>
