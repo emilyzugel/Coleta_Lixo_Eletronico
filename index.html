@@ -5,18 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Descarte de Lixo Eletrônico</title>
 
+  <!-- JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --base: #1e1e2e;
+      --mantle: #181825;
+      --text: #cdd6f4;
+      --rosewater: #f5e0dc;
+      --mauve: #cba6f7;
+      --surface0: #313244;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'JetBrains Mono', monospace;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
-      color: #333;
+      background: var(--base);
+      color: var(--text);
     }
 
     header {
-      background: #2b7a78;
-      color: white;
+      background: var(--mantle);
+      color: var(--rosewater);
       padding: 2rem 1rem;
       text-align: center;
     }
@@ -26,7 +40,7 @@
     }
 
     h2 {
-      color: #2b7a78;
+      color: var(--mauve);
       margin-top: 1.5rem;
     }
 
@@ -36,7 +50,7 @@
     }
 
     li {
-      background: #e0f7fa;
+      background: var(--surface0);
       margin-bottom: 0.5rem;
       padding: 0.75rem;
       border-radius: 5px;
@@ -46,32 +60,37 @@
     }
 
     button {
-      background-color: #2b7a78;
-      color: white;
+      background-color: var(--mauve);
+      color: var(--mantle);
       border: none;
       padding: 0.4rem 0.7rem;
       border-radius: 4px;
       cursor: pointer;
+      font-weight: bold;
     }
 
     button:hover {
-      background-color: #205e5e;
+      background-color: var(--rosewater);
     }
 
     #map {
       width: 100%;
       height: 300px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--surface0);
       border-radius: 8px;
       margin-top: 1rem;
     }
 
     footer {
-      background: #17252a;
-      color: white;
+      background: var(--mantle);
+      color: var(--rosewater);
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
+    }
+
+    a {
+      color: var(--mauve);
     }
   </style>
 </head>
@@ -90,10 +109,7 @@
     <section class="pontos">
       <h2>Pontos de Coleta em Frederico Westphalen</h2>
       <ul>
-        <li>EcoPonto - Itapagé, Praça da URI <button onclick="mostrarMapa('itapage')">Ver no mapa</button></li>
-        <li>EcoPonto - Santo Antônio, próximo ao Sersa <button onclick="mostrarMapa('santo')">Ver no mapa</button></li>
-        <li>EcoPonto - Primavera, próximo à capela <button onclick="mostrarMapa('primavera')">Ver no mapa</button></li>
-        <li>EcoPonto - Centro, próximo à Agência dos Correios <button onclick="mostrarMapa('centro')">Ver no mapa</button></li>
+        <li>EcoPonto - Container <button onclick="mostrarMapa('centro')">Ver no mapa</button></li>
         <li>LS Tecnologia – R. Arthur Milani, 735, Centro <button onclick="mostrarMapa('ls')">Ver no mapa</button></li>
         <li>Shopping da Música – Av. João Muniz Reis, 1187 <button onclick="mostrarMapa('shopping')">Ver no mapa</button></li>
       </ul>
@@ -117,11 +133,8 @@
 
   <script>
     const mapas = {
-      itapage: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.394000000000!3d-27.360000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sPraça%20da%20URI!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
-      santo: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.395000000000!3d-27.361000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sSersa!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
-      primavera: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.396000000000!3d-27.362000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sCapela%20Primavera!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
-      centro: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.397000000000!3d-27.363000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sCorreios!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
-      ls: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.398000000000!3d-27.364000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sLS%20Tecnologia!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
+      container: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3544.0093409930532!2d-53.391639526689225!3d-27.344176459174157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb75f45900a91d%3A0xd20b345df066af3b!2sExhibition%20Park%20Monsignor%20Vitor%20Batistella!5e0!3m2!1sen!2sbr!4v1752189706794!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade',
+      ls: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.5212100158283!2d-53.397901625303696!3d-27.359433312015533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9fc87e17c9cf%3A0xfc451a83aaac6969!2sLS%20Solu%C3%A7%C3%B5es%20em%20Tecnologia!5e0!3m2!1sen!2sbr!4v1752189439730!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade',
       shopping: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.5038357279823!2d-53.39689872530364!3d-27.359976212038696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9dfe1c22b4bb%3A0xd05c59ccac647d7d!2sShopping%20da%20M%C3%BAsica!5e0!3m2!1sen!2sbr!4v1752188925849!5m2!1sen!2sbr'
     };
 
