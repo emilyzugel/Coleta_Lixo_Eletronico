@@ -40,6 +40,22 @@
       margin-bottom: 0.5rem;
       padding: 0.75rem;
       border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    button {
+      background-color: #2b7a78;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #205e5e;
     }
 
     #map {
@@ -74,21 +90,24 @@
     <section class="pontos">
       <h2>Pontos de Coleta em Frederico Westphalen</h2>
       <ul>
-        <li><strong>EcoPontos FW:</strong></li>
-        <li> Itapagé, na Praça da URI </li>
-        <li> Santo Antônio, próximo ao Sersa </li>
-        <li> Primavera, próximo à capela </li>
-        <li> Centro, próximo à Agência dos Correios </li>
-      </ul>
-      <ul>
-        <li><strong>LS Tecnologia:</strong>  R. Arthur Milani, 735, Centro - 8:30h às 18h</li>
-        <li><strong>Shopping da Música:</strong> Av. João Muniz Reis, 1187, Centro – Seg a Sex, 08:30h-18h </li>
+        <li>EcoPonto - Itapagé, Praça da URI <button onclick="mostrarMapa('itapage')">Ver no mapa</button></li>
+        <li>EcoPonto - Santo Antônio, próximo ao Sersa <button onclick="mostrarMapa('santo')">Ver no mapa</button></li>
+        <li>EcoPonto - Primavera, próximo à capela <button onclick="mostrarMapa('primavera')">Ver no mapa</button></li>
+        <li>EcoPonto - Centro, próximo à Agência dos Correios <button onclick="mostrarMapa('centro')">Ver no mapa</button></li>
+        <li>LS Tecnologia – R. Arthur Milani, 735, Centro <button onclick="mostrarMapa('ls')">Ver no mapa</button></li>
+        <li>Shopping da Música – Av. João Muniz Reis, 1187 <button onclick="mostrarMapa('shopping')">Ver no mapa</button></li>
       </ul>
     </section>
 
     <section class="mapa">
-      <h2>Mapa Interativo</h2>
-      <div id="map"></div>
+      <h2>Mapa do Ponto Selecionado</h2>
+      <div id="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.5038357279823!2d-53.39689872530364!3d-27.359976212038696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9dfe1c22b4bb%3A0xd05c59ccac647d7d!2sShopping%20da%20M%C3%BAsica!5e0!3m2!1sen!2sbr!4v1752188925849!5m2!1sen!2sbr"
+          width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
     </section>
   </main>
 
@@ -97,30 +116,19 @@
   </footer>
 
   <script>
-    function initMap() {
-      const centro = { lat: -27.3586, lng: -53.3955 };
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 14,
-        center: centro,
-      });
+    const mapas = {
+      itapage: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.394000000000!3d-27.360000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sPraça%20da%20URI!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
+      santo: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.395000000000!3d-27.361000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sSersa!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
+      primavera: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.396000000000!3d-27.362000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sCapela%20Primavera!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
+      centro: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.397000000000!3d-27.363000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sCorreios!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
+      ls: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.000000000000!2d-53.398000000000!3d-27.364000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9xxxxxxx!2sLS%20Tecnologia!5e0!3m2!1spt-BR!2sbr!4v0000000000000!5m2!1spt-BR!2sbr',
+      shopping: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.5038357279823!2d-53.39689872530364!3d-27.359976212038696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fb9dfe1c22b4bb%3A0xd05c59ccac647d7d!2sShopping%20da%20M%C3%BAsica!5e0!3m2!1sen!2sbr!4v1752188925849!5m2!1sen!2sbr'
+    };
 
-      const pontos = [
-        { nome: "EcoCentro UFSM", lat: -27.3575, lng: -53.3960 },
-        { nome: "Loja GreenTech", lat: -27.3612, lng: -53.3925 },
-        { nome: "Shopping da Música", lat: -27.3589, lng: -53.3940 }
-      ];
-
-      pontos.forEach(p => {
-        new google.maps.Marker({
-          position: { lat: p.lat, lng: p.lng },
-          map,
-          title: p.nome,
-        });
-      });
+    function mostrarMapa(id) {
+      const iframe = `<iframe src="${mapas[id]}" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+      document.getElementById("map").innerHTML = iframe;
     }
   </script>
-
-  <!-- Substitua SUA_CHAVE_API_AQUI pela sua chave da API do Google Maps -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_API_AQUI&callback=initMap"></script>
 </body>
 </html>
